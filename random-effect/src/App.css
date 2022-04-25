@@ -44,6 +44,7 @@
   margin: auto;
   text-align: center;
   align-items: center;
+  display:flex;
 }
 
 .imgbx{
@@ -51,4 +52,11 @@
   min-width: 100%;
   object-fit: cover;
   vertical-align: bottom;
+  border-radius: 5px;
+  border-color: black;
+}
+.drag{
+
+  margin-left: auto;
+  margin-right: auto;
 }
