@@ -10,12 +10,10 @@ import Archive from './Components/Archive'
 
 function App() {
   return (
-    <Router>
-     <div style={{ backgroundColor: "purple", minHeight: "100vh", width: "100%" }}>
+    <Router> 
      <Navigation/>
    <Container fluid>
      <Switch>
-       
        <Route path="/homepage">
        <Homepage />
        </Route>
@@ -27,8 +25,6 @@ function App() {
        <Redirect to="/homepage"/>
      </Switch>
    </Container>
-       </div> 
-   
  </Router>
   );
 }

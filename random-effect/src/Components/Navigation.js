@@ -6,10 +6,8 @@ import Homepage from '../Components/Homepage'
 function Navigation(){
         return (
             <>
-<div style={{ backgroundColor: "purple", minHeight: "15vh", width: "100%" }}>
+<div style={{ backgroundColor: "purple", minHeight: "13vh", width: "100%" }}>
 <ReactNavbar
-          color="#191919"
-            logo="https://svgshare.com/i/KHh.svg"
             menu={[
               { name: "HOME PAGE", to: "/", component: Homepage },
               { name: "ARCHIVE PAGE", to: "/archive", component: Archive },
