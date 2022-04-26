@@ -1,0 +1,13 @@
+### Getting all effects
+GET http://localhost:3001/api/effects
+
+
+### Adding new effect
+POST http://localhost:3001/api/effects
+Content-Type: application/json
+
+{ "effect_id": 3, "effect_name":"new effect", "effect_description":"lorel ipsum", "effect_type":"effect" }
+
+
+### Delete existing question
+DELETE http://localhost:3001/api/effects/delete/3
