@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row,Col, Image, Figure, Form } from "react-bootstrap";
+import { Container, Row,Col, Figure, Form } from "react-bootstrap";
 import { FileUploader } from "react-drag-drop-files";
 
 
@@ -10,6 +10,8 @@ function Homepage(props) {
   const [file, setFile] = useState(null);
   const [height, setHeight] = useState(600);
   const [width, setWidth] = useState(300);
+
+  const {effects}=props
 
   const handleChange = (file) => {
     setFile(file);
@@ -44,6 +46,7 @@ function Homepage(props) {
               />
   </Col> 
 </Row>
+<p>{effects[0].effect_name}</p>
 </>
 }
 </div>
