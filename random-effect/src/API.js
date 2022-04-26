@@ -16,8 +16,46 @@ async function getallEffects(){
          }
      }
 
+     function addImage(file) {
+        return new Promise((resolve, reject) => {
+          fetch('http://localhost:3000/api/upload', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            //body: JSON.stringify({code: exam.coursecode, score: exam.score, date: exam.date}),
+            body : JSON.stringify({file})
+            }).then((response) => {
+              if (response.ok) {
+                resolve(null);
+              } else {
+                // analyze the cause of error
+                response.json()
+                  .then((message) => { reject(message); }) // error message in the response body
+                  .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+              }
+          }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+        });
+      }   
+      
+      
+      async function uploadImage(formData) {
+        const response = await fetch(
+          '/api/upload/',
+          {
+            method: 'POST',
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          return true;
+        } else {
+          let err = { status: response.status, errObj: await response.json() };
+          throw err; // An object with the error coming from the server
+        }
+      }
 
      const API = { 
-        getallEffects
+        getallEffects, addImage, uploadImage
        };
 export default API;     

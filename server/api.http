@@ -6,7 +6,7 @@ GET http://localhost:3001/api/effects
 POST http://localhost:3001/api/effects
 Content-Type: application/json
 
-{ "effect_id": 3, "effect_name":"new effect", "effect_description":"lorel ipsum", "effect_type":"effect" }
+{ "effect_id": 3, "effect_name":"Tilt", "effect_description":"Tilting is a technique in which the camera stays in a fixed position but rotates up/down in a vertical plane.", "effect_type":"effect" }
 
 
 ### Delete existing question
