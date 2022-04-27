@@ -47,7 +47,7 @@ var storage = multer.diskStorage({
 const upload = multer({storage}).single('image');
 
 app.post("/api/upload", upload, (req, res) => {
-
+  let uploadPath; 
 console.log(req.files)
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
@@ -55,13 +55,26 @@ console.log(req.files)
   if (!req.files) {
       console.log("No file upload ");
   } else {
-      console.log(req.files.file.name)
-      var imgsrc = 'http://127.0.0.1:3000/images/' + req.files.file.name
-      var insertData = "INSERT INTO Images(image_id, image, image_name, user_id)VALUES(?,?,?,?)"
-      db.query(insertData, [5,imgsrc,"photo",1], (err, result) => {
+    const file=req.files.file
+      console.log(file.name)
+      let newPath=path.resolve("../random-effect/")
+      uploadPath=newPath + '/src/assets/' + file.name
+     // uploadPath = __dirname + '/upload/' + file.name;   
+      
+      console.log(uploadPath)   
+  file.mv(uploadPath, function(err){
+    if(err) return res.status(500).send(err)
+
+    var insertData = "INSERT INTO Images(image, image_name, user_id)VALUES(?,?,?)"
+      db.query(insertData, [file.name,"photo",1], (err, result) => {
           if (err) throw err
+         else {
           console.log("file uploaded")
+         } 
       })
+  })    
+     // var imgsrc = 'http://127.0.0.1:3000/images/' + file.name
+      
   }
 
 });
