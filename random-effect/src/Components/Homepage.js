@@ -7,8 +7,9 @@ import axios from 'axios'
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 function Homepage(props) {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [image, setImage]=useState(null)
   const [height, setHeight] = useState(600);
   const [width, setWidth] = useState(300);
 
@@ -35,6 +36,18 @@ function Homepage(props) {
     }
   };
 
+  const showImage = async (e)=>{
+    try{
+      if(!image){
+        const res = await API.getImage(2)
+        setImage(res[0].image)
+      }
+      
+    }catch(ex){
+      console.log(ex)
+    }
+  }
+
   return (
     <>
       <Container fluid>
@@ -49,9 +62,10 @@ function Homepage(props) {
             />
           <input type="file" name="image" onChange={saveFile} />
           <button onClick={uploadFile}>Upload</button>
-            {file !== null && (
+          <button onClick={showImage}>Show</button>
+            {(file !== null && image !==null)&& (
               <>
-              {/*<ImageBox file={file.name} height={height} width={width} /> */ }  
+              <ImageBox file={image} height={height} width={width} /> 
                 <Row>
                   <Col sm={1}>Size</Col>
                   <Col sm={3}>
@@ -101,7 +115,7 @@ function ImageBox(props) {
           <Figure.Image
             width={parseInt(width)}
             height={parseInt(height)}
-            src={require(`../assets/${file}`)}
+            src={require(`${file}`)}
           />
           <Figure.Caption>
             {`${file} was uploaded, please select the filter or transmission`}

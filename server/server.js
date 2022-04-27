@@ -1,5 +1,4 @@
 "use strict";
-
 const express = require("express");
 const app = new express();
 const PORT = 3001;
@@ -15,6 +14,7 @@ const bodyParser = require('body-parser');
 
 
 const effectsDao = require("./effects-dao");
+const imagesDao = require("./image-dao")
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -37,14 +37,14 @@ app.get("/", (req, res) => {
 
 var storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-      callBack(null, './public/images/')     // './public/images/' directory name where save the file
+      callBack(null, require('./public/images/'))     // './public/images/' directory name where save the file
   },
   filename: (req, file, callBack) => {
       callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
 })
 
-const upload = multer({storage}).single('file');
+const upload = multer({storage}).single('image');
 
 app.post("/api/upload", upload, (req, res) => {
 
@@ -52,41 +52,29 @@ console.log(req.files)
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
   }
-
- // const filename = req.params.img_id;
-/*
- const filename="seal"
-  let file = req.files;
-
-  file.name = filename + '.jpg';
-  const imgpath = __dirname + '/../client/public/products/' + file.name;
-
-  file.mv(imgpath, (err) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.send({ status: 'success', path: imgpath });
-  });*/
- /* console.log(req.files);
-  res.send('UPLOADED!!!');
-  */
   if (!req.files) {
       console.log("No file upload ");
   } else {
-      console.log(req.files.name)
-      var imgsrc = 'http://127.0.0.1:3000/images/' + req.files.name
+      console.log(req.files.file.name)
+      var imgsrc = 'http://127.0.0.1:3000/images/' + req.files.file.name
       var insertData = "INSERT INTO Images(image_id, image, image_name, user_id)VALUES(?,?,?,?)"
-      db.query(insertData, [1,imgsrc,"photo",1], (err, result) => {
+      db.query(insertData, [5,imgsrc,"photo",1], (err, result) => {
           if (err) throw err
           console.log("file uploaded")
       })
   }
 
-
 });
+////////////////////Images///////////////////////////
 
+app.get('/api/images/:imageId', (req,res)=>{
+  const imageId=req.params.imageId
+  imagesDao.listImage(imageId)
+      .then((questions)=>{res.json(questions)})
+      .catch((error)=>{res.status(500).json(error)} )
+})
 
-
+/////////////////// Effects///////////////////////////////////
 app.get("/api/effects", (req, res) => {
   effectsDao
     .listAllEffects()

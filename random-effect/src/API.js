@@ -1,3 +1,4 @@
+const url='http://localhost:3000'
 /*APIs FOR Effects */
 
 //Getting all effects
@@ -54,8 +55,22 @@ async function getallEffects(){
           throw err; // An object with the error coming from the server
         }
       }
-
+ 
+      async function getImage(imageId) {
+        let url1 = "/api/images/"+ imageId;
+        const response = await fetch(url + url1);
+        if(response.ok){
+          const responseBody=await response.json();
+          return responseBody;
+        }
+         else{
+             try {
+               const err=await response.json();
+               throw err.message;}
+                catch(err){throw err;}
+             }
+         }
      const API = { 
-        getallEffects, addImage, uploadImage
+        getallEffects, addImage, uploadImage, getImage
        };
 export default API;     

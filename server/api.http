@@ -11,3 +11,7 @@ Content-Type: application/json
 
 ### Delete existing question
 DELETE http://localhost:3001/api/effects/delete/3
+
+
+### Getting all effects
+GET http://localhost:3001/api/images/2
