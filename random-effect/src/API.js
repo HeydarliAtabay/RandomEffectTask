@@ -75,6 +75,6 @@ async function getallEffects(){
              }
          }
      const API = { 
-        getallEffects, addImage, uploadImage, getImage, applyFilterToImage
+        getallEffects, addImage, uploadImage, getImage
        };
 export default API;     
