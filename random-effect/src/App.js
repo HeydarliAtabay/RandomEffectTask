@@ -12,6 +12,7 @@ import { Container } from "react-bootstrap";
 import Navigation from "./Components/Navigation";
 import Homepage from "./Components/Homepage";
 import Archive from "./Components/Archive";
+import LoginComponent from "./Components/LoginComponent"
 
 import API from "../src/API";
 
