@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const url='http://localhost:3000'
 /*APIs FOR Effects */
 
@@ -40,9 +42,9 @@ async function getallEffects(){
       }   
       
       
-      async function uploadImage(formData) {
+      async function uploadImage(formData,effect) {
         const response = await fetch(
-          '/api/upload/',
+          '/api/apply/'+effect,
           {
             method: 'POST',
             body: formData,
@@ -56,6 +58,8 @@ async function getallEffects(){
         }
       }
  
+    
+
       async function getImage(imageId) {
         let url1 = "/api/images/"+ imageId;
         const response = await fetch(url + url1);
@@ -71,6 +75,6 @@ async function getallEffects(){
              }
          }
      const API = { 
-        getallEffects, addImage, uploadImage, getImage
+        getallEffects, addImage, uploadImage, getImage, applyFilterToImage
        };
 export default API;     

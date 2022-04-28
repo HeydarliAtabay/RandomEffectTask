@@ -9,8 +9,9 @@ function Homepage(props) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [image, setImage]=useState(null)
-  const [height, setHeight] = useState(600);
-  const [width, setWidth] = useState(500);
+  const [height, setHeight] = useState(400);
+  const [width, setWidth] = useState(400);
+  const [effect, setEffect]=useState("Flip")
 
   const { effects } = props;
 
@@ -22,6 +23,7 @@ function Homepage(props) {
     e.preventDefault();
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
+    if(fileName)setImage(fileName)
     e.preventDefault();
   };
   const uploadFile = async (e) => {
@@ -29,13 +31,15 @@ function Homepage(props) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", fileName);
-    try {
-      const res = await API.uploadImage(formData);
-      // const res = await axios.post("http://localhost:3000/api/upload", formData );
-      console.log(res);
-    } catch (ex) {
-      console.log(ex);
-    }
+
+      try {
+        const res = await API.uploadImage(formData,effect);
+        // const res = await axios.post("http://localhost:3000/api/upload", formData );
+        console.log(res);
+      } catch (ex) {
+        console.log(ex);
+      }
+    
    
   };
 
@@ -58,13 +62,12 @@ function Homepage(props) {
             />
             <form onSubmit={uploadFile} encType="multipart/form-data" action="#">
               <input type="file" name="image" onChange={saveFile} />
-              <button type="submit">Upload</button>
-              <button onClick={showImage} >Show</button>
+             {(image) ? <button type="submit">Apply</button> : <button type="submit">Upload</button>  } 
+              
             </form>
+            <button onClick={showImage} >Show</button>
 
-            {(file !== null  && image !==null)  && (
-              <>
-                <ImageBox file={image} height={height} width={width} />
+              {image && <ImageBox file={image} height={height} width={width} />}  
                 <Row>
                   <Col sm={1}>Size</Col>
                   <Col sm={3}>
@@ -87,17 +90,32 @@ function Homepage(props) {
                     />
                   </Col>
                 </Row>
-                <Row>
-                  {effects.map((effect, index) => {
-                    return (
-                      <Col>
-                        <Button>{effect.effect_name} </Button>
-                      </Col>
-                    );
+                
+                  <Form>
+                  <Row>
+                  <Col sm={4}>
+                  <Form.Label>
+                      Select the effect
+                    </Form.Label>
+                  </Col>  
+                  <Col sm={8}>
+                  <Form.Control
+                  as="select"
+                  value={effect}
+                  onChange={(ev) => {
+                    setEffect(ev.target.value);
+                  }}
+                >
+                  {[...effects].map((effect, index) => {
+                    return <option>{effect.effect_name}</option>;
                   })}
-                </Row>
-              </>
-            )}
+                </Form.Control>
+                  </Col>  
+                 
+                    
+                    </Row>
+                  </Form>
+              
           </div>
         </div>
       </Container>
@@ -113,8 +131,8 @@ function ImageBox(props) {
       <div className="imgbx">
         <Figure>
           <Figure.Image
-            width={600}
-            height={900}
+            width={400}
+            height={400}
             src={require(`../assets/${file}`)}
           />
           <Figure.Caption>

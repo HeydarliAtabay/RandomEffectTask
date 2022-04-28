@@ -15,3 +15,8 @@ DELETE http://localhost:3001/api/effects/delete/3
 
 ### Getting all effects
 GET http://localhost:3001/api/images/2
+
+
+### Adding new effect
+POST http://localhost:3001/api/apply/flip
+
