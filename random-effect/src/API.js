@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const url='http://localhost:3000'
 /*APIs FOR Effects */
 

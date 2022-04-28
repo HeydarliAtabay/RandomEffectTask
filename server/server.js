@@ -271,14 +271,6 @@ app.post('/api/sessions', function(req, res, next) {
   })(req, res, next);
 });
 
-// ALTERNATIVE: if we are not interested in sending error messages...
-/*
-app.post('/api/sessions', passport.authenticate('local'), (req,res) => {
-  // If this function gets called, authentication was successful.
-  // `req.user` contains the authenticated user.
-  res.json(req.user);
-});
-*/
 
 // DELETE /sessions/current 
 // logout

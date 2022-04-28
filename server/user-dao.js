@@ -9,15 +9,15 @@ const bcrypt= require('bcrypt')
 
 exports.getUserById = (id) => {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM users WHERE id = ?';
-        db.get(sql, [id], (err, row) => {
+      const sql = 'SELECT * FROM Users WHERE id = ?';
+        db.query(sql, [id], (err, row) => {
           if (err) 
             reject(err);
           else if (row === undefined)
             resolve({error: 'User not found.'});
           else {
             // by default, the local strategy looks for "username": not to create confusion in server.js, we can create an object with that property
-            const user = {id: row.id, username: row.email, name: row.name}
+            const user = {id: row[0].id, username: row[0].email, name: row[0].name}
             resolve(user);
           }
       });
@@ -27,19 +27,19 @@ exports.getUserById = (id) => {
 // getting user  
 
 exports.getUser = (email, password) => {
+  console.log(email + " " + password)
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM users WHERE email = ?';
-        db.get(sql, [email], (err, row) => {
+      const sql = 'SELECT * FROM Users WHERE email = ?';
+        db.query(sql, [email], (err, row) => {
           if (err) 
             reject(err);
           else if (row === undefined) {
             resolve(false);
           }
           else {
-            const user = {id: row.id, username: row.email, name: row.name};
-              
+            const user = {id: row[0].id, name: row[0].name, username: row[0].email };
             // check the hashes with an async call, given that the operation may be CPU-intensive (and we don't want to block the server)
-            bcrypt.compare(password, row.hash).then(result => {
+            bcrypt.compare(password, row[0].hash).then(result => {
               if(result)
                 resolve(user);
               else
