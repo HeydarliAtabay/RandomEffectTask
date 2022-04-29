@@ -124,10 +124,6 @@ if(effect==="ChangeColor"){
   console.log("The color of image was changed")
 }
 
-if(effect==="Tilt"){
-
-  console.log("image was tilted")
-}
 if(effect==="InvertColor"){
   invert();
   console.log("image color was inverted")

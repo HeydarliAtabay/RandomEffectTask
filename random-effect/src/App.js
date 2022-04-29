@@ -3,11 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { React, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
   Switch,
+  Redirect
 } from "react-router-dom";
-import { Row } from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 
 import Navigation from "./Components/Navigation";
 import Homepage from "./Components/Homepage";
@@ -74,24 +74,25 @@ useEffect(()=> {
     <Router>
        {loggedIn? <Navigation loggedIn={loggedIn} logout={doLogOut} link={"/"} info={"Log out "} />: <Navigation loggedIn={loggedIn} logout={doLogOut} link="/login"info={"Log in "} />}
       {(loggedIn && message) &&<AdminDetails greetings={message.msg}/>}
-     
+      <Container fluid>
         <Switch>
-         <Route path="/homepage">
+         <Route path="/homepage" exact>
             <Homepage user={userId} effects={effectList} loggedIn={loggedIn} />
           </Route>
 
-          <Route path="/archive">
+          <Route path="/archive" exact>
             <Archive />
           </Route>
 
-          <Route path="/login">
+          <Route path="/login" exact>
           <Row className="vh-100 below-nav">
-          {loggedIn ? <Redirect to="/homepage" /> : <LoginComponent login={doLogIn} serverError={message.msg}/>}
+          {loggedIn ? <Redirect to="/homepage"/> : <LoginComponent login={doLogIn} serverError={message.msg}/>}
           </Row>
 
           </Route>
-         {!loggedIn && <Redirect to="/homepage" />} 
+          <Redirect to="/homepage"/>
         </Switch>
+        </Container>
     </Router>
   );
 }

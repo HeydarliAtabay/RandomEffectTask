@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Figure, Form, Carousel } from "react-bootstrap";
 import API from "../API";
+import { useHistory } from "react-router-dom";
 
 function Homepage(props) {
   const [file, setFile] = useState(null);
@@ -9,6 +10,7 @@ function Homepage(props) {
   const [effect, setEffect] = useState("Flip");
 
   const { effects, loggedIn } = props;
+  const history = useHistory()
 
   // saving file in a state of app
   const saveFile = (e) => {
@@ -131,7 +133,7 @@ function Homepage(props) {
                 </Carousel>
                 <button
                   className="btnlog"
-                  onclick="window.location.href='/login';"
+                  onClick={()=>{history.push("/login")}}
                   type="button"
                 >
                   Login for trying this filters and effects
