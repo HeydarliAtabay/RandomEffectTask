@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactNavbar } from "react-responsive-animate-navbar";
 import { Navbar, Nav, Form } from "react-bootstrap/";
 import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
 
@@ -8,11 +7,11 @@ import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
   
   function Navigation(props) {
     return (
-      <Navbar bg="dark" variant="dark" fixed="top">
+      <Navbar className="color-nav" variant="dark" fixed="top">
         {/* <Navbar.Toggle aria-controls="left-sidebar" onClick={this.showSidebar}/> */}
         <Navbar.Toggle aria-controls="left-sidebar" />
         <Navbar.Brand href="/">
-          <ClipboardData className="mr-1" size="30" />Random Effects
+          <ClipboardData className="color-nav-text" size="30" /> <span className="color-nav-text">Random Effects</span>
         </Navbar.Brand>
         <Form
           inline
@@ -22,11 +21,17 @@ import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
           aria-label="Quick search"
         >
         </Form>
-        <Nav className="ml-auto">
+        <Nav>
+      <Nav.Link href="/homepage"> <span style={{color:"white", fontSize:18}}>Home Page</span> </Nav.Link>
+      <Nav.Link eventKey={2} href="/archive"><span style={{color:"white", fontSize:18}}>Archive Page</span> </Nav.Link>
+    </Nav>
+        <Nav >
           <Nav.Item>
-            <Nav.Link onClick={props.logout} href={props.link}> {props.info}
-              <PersonCircle size="30" />
+            
+            <Nav.Link  onClick={props.logout} href={props.link}> <span className="color-nav-text"> {props.info}</span>
+              <PersonCircle color="#F64C72" size="30" />
             </Nav.Link>
+
           </Nav.Item>
         </Nav>
       </Navbar>

@@ -73,7 +73,7 @@ useEffect(()=> {
     <Router>
        {loggedIn? <Navigation logout={doLogOut} link={"/"} info={"Log out "} />: <Navigation logout={doLogOut} link="/login"info={"Log in "} />}
       {(loggedIn && message) &&<AdminDetails greetings={message.msg}/>}
-      <Container fluid>
+     
         <Switch>
          <Route path="/homepage">
             <Homepage effects={effectList} loggedIn={loggedIn} />
@@ -89,9 +89,8 @@ useEffect(()=> {
           </Row>
 
           </Route>
-         {!loggedIn && <Redirect to="/login" />} 
+         {!loggedIn && <Redirect to="/homepage" />} 
         </Switch>
-      </Container>
     </Router>
   );
 }
