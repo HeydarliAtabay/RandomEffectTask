@@ -8,8 +8,8 @@ import {
   Button,
   Carousel,
 } from "react-bootstrap";
-import { FileUploader } from "react-drag-drop-files";
 import API from "../API";
+import { useAlert } from 'react-alert'
 
 
 const fileTypes = ["JPG", "PNG", "GIF"];
@@ -66,22 +66,16 @@ function Homepage(props) {
                   action="#"
                 >
                   <input  type="file" name="image" onChange={saveFile} />
-                  <button className="btnsimple" type="submit">Apply</button>
+                 {file ? <button className="btnsimple" type="submit">Apply</button> : <button title="you should upload image first"className="btnsimple" type="submit" disabled>Apply</button>} 
                   
                 </form>
                 
-
-                
-                 {image ? <ImageBox style={{marginTop:"5px"}} file={image} height={height} width={width} /> : <ImageBox /> } 
-                 <button className="btnsimple" onClick={showImage}>Show</button>
-               
-
-                <Form>
+                <Form style={{marginBottom:"15px"}}>
                   <Row>
                     <Col sm={4}>
                       <Form.Label>Select the effect</Form.Label>
                     </Col>
-                    <Col sm={8}>
+                    <Col sm={7}>
                       <Form.Control
                         as="select"
                         value={effect}
@@ -96,6 +90,12 @@ function Homepage(props) {
                     </Col>
                   </Row>
                 </Form>
+
+                
+                 {image ? <ImageBox style={{marginTop:"5px"}} file={image} height={height} width={width} /> : <ImageBox /> } 
+                 <button className="btnsimple" onClick={showImage}>Show</button>
+               
+
               </>
             )}
 
