@@ -87,8 +87,8 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-
-app.post("/api/apply/:effect", (req, res) => {
+// main request for applying an effect
+app.post("/api/apply/:effect",isLoggedIn, (req, res) => {
   let effect=req.params.effect
   let uploadPath;
   console.log(req.files);
@@ -186,13 +186,9 @@ if(effect==="Sepia"){
   }
 });
 
-app.post("/api/apply/:effectName", (req, res) => {
-  console.log(req.files);
-  // let effectName=req.params.effectName
-  console.log(`Selected Effect is hello`);
-});
 ////////////////////Images///////////////////////////
 
+// getting an image
 app.get("/api/images/:imageId", (req, res) => {
   const imageId = req.params.imageId;
   imagesDao
@@ -206,7 +202,9 @@ app.get("/api/images/:imageId", (req, res) => {
 });
 
 /////////////////// Effects///////////////////////////////////
-app.get("/api/effects", (req, res) => {
+
+// getting all effects
+app.get("/api/effects",isLoggedIn, (req, res) => {
   effectsDao
     .listAllEffects()
     .then((effects) => {
@@ -216,7 +214,7 @@ app.get("/api/effects", (req, res) => {
       res.status(500).json(error);
     });
 });
-
+// adding new effect
 app.post("/api/effects", (req, res) => {
   const effect = req.body;
   if (!effect) {
@@ -228,7 +226,7 @@ app.post("/api/effects", (req, res) => {
       .catch((err) => res.status(500).json(err));
   }
 });
-
+// deleting an effect
 app.delete("/api/effects/delete/:effectid", (req, res) => {
   const effectid = req.params.effectid;
   effectsDao

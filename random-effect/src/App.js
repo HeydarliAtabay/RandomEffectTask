@@ -7,7 +7,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 import Navigation from "./Components/Navigation";
 import Homepage from "./Components/Homepage";
@@ -20,12 +20,12 @@ import API from "../src/API";
 function App() {
 const [loading, setLoading] = useState(true);
 const [dirty, setDirty] = useState(true);
-const [effectList, setEffectList] = useState([]);
+const [effectList, setEffectList] = useState([]); // for effect list
 const [loggedIn, setLoggedIn] = useState(false); // at the beginning, no user is logged in
-const [message, setMessage] = useState('');
-const [userId, setUserId]=useState(1)
+const [message, setMessage] = useState(''); // for sending error messages
+const [userId, setUserId]=useState(1) // userId
 
-
+// Checking user authentication
 useEffect(()=> {
   const checkAuth = async() => {
     try {
@@ -38,6 +38,7 @@ useEffect(()=> {
   checkAuth();
 }, []);
 
+// getting all effects
   useEffect(() => {
     if (dirty) {
       API.getallEffects().then((newEffect) => {
@@ -76,7 +77,7 @@ useEffect(()=> {
      
         <Switch>
          <Route path="/homepage">
-            <Homepage effects={effectList} loggedIn={loggedIn} />
+            <Homepage user={userId} effects={effectList} loggedIn={loggedIn} />
           </Route>
 
           <Route path="/archive">
