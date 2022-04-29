@@ -71,7 +71,7 @@ useEffect(()=> {
 
   return (
     <Router>
-       {loggedIn? <Navigation logout={doLogOut} link={"/"} info={"Log out "} />: <Navigation logout={doLogOut} link="/login"info={"Log in "} />}
+       {loggedIn? <Navigation loggedIn={loggedIn} logout={doLogOut} link={"/"} info={"Log out "} />: <Navigation loggedIn={loggedIn} logout={doLogOut} link="/login"info={"Log in "} />}
       {(loggedIn && message) &&<AdminDetails greetings={message.msg}/>}
      
         <Switch>

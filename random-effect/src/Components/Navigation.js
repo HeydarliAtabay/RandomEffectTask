@@ -6,6 +6,7 @@ import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
 
   
   function Navigation(props) {
+    const {loggedIn}=props
     return (
       <Navbar className="color-nav" variant="dark" fixed="top">
         {/* <Navbar.Toggle aria-controls="left-sidebar" onClick={this.showSidebar}/> */}
@@ -21,10 +22,17 @@ import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
           aria-label="Quick search"
         >
         </Form>
+       
+     {loggedIn && (
+       <>
         <Nav>
-      <Nav.Link href="/homepage"> <span style={{color:"white", fontSize:18}}>Home Page</span> </Nav.Link>
+       <Nav.Link href="/homepage"> <span style={{color:"white", fontSize:18}}>Home Page</span> </Nav.Link>
       <Nav.Link eventKey={2} href="/archive"><span style={{color:"white", fontSize:18}}>Archive Page</span> </Nav.Link>
-    </Nav>
+      </Nav>
+       </>
+     )}
+      
+    
         <Nav >
           <Nav.Item>
             

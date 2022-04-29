@@ -32,25 +32,28 @@ function LoginComponent(props) {
 
 return (
   <>
+  <div className="cont">
   <div className="loginContainer">
  
-  <div className="loginForm" >
-  <Row><Col sm={12}><h5>Login for trying our effects</h5></Col></Row>
-  <Form variant="dark"  >
-    <Form.Group controlId='username'>
-        <Form.Label className="formtxt">Email address</Form.Label>
-        <Form.Control type='email' value={username} onChange={ev => setUsername(ev.target.value)} size="lg" />
-    </Form.Group>
-    <Form.Group controlId='password'>
-        <Form.Label className="formtxt">Password</Form.Label>
-        <Form.Control type='password' value={password} onChange={ev => setPassword(ev.target.value)} size="lg" />
-    </Form.Group>
-    {errorMessage ?  <Alert variant='danger'>{errorMessage}</Alert> : ''}
-    { serverError ?  <Alert variant='danger'>{serverError}</Alert> : ''}
-    <Button size="lg" onClick={handleSubmit}>Login</Button>
-  </Form>
+ <div className="loginForm" >
+ <Row><Col sm={12}><h5 style={{color:"white"}}>Login </h5></Col></Row>
+ <Form variant="dark"  >
+   <Form.Group controlId='username'>
+       <Form.Label className="formtxt"> <span style={{marginTop:"5px",color:"white"}}>Email address</span></Form.Label>
+       <Form.Control type='email' value={username} onChange={ev => setUsername(ev.target.value)} size="lg" />
+   </Form.Group>
+   <Form.Group controlId='password'>
+       <Form.Label className="formtxt"><span style={{color:"white"}}>Password</span></Form.Label>
+       <Form.Control type='password' value={password} onChange={ev => setPassword(ev.target.value)} size="lg" />
+   </Form.Group>
+   {errorMessage ?  <Alert variant='danger'>{errorMessage}</Alert> : ''}
+   { serverError ?  <Alert variant='danger'>{serverError}</Alert> : ''}
+   <button className="btnlog" onClick={handleSubmit}>Login</button>
+ </Form>
+ </div>
+ </div>
   </div>
-  </div>
+ 
   </>
   )
 }
