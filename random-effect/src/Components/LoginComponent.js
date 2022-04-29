@@ -35,7 +35,7 @@ return (
   <div className="loginContainer">
  
   <div className="loginForm" >
-  <Row><Col sm={12}><h5>Login as a Form Creator</h5></Col></Row>
+  <Row><Col sm={12}><h5>Login for trying our effects</h5></Col></Row>
   <Form variant="dark"  >
     <Form.Group controlId='username'>
         <Form.Label className="formtxt">Email address</Form.Label>

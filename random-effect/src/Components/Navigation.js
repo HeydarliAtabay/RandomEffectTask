@@ -1,9 +1,43 @@
 import React from "react";
 import { ReactNavbar } from "react-responsive-animate-navbar";
-import Archive from "../Components/Archive";
-import Homepage from "../Components/Homepage";
+import { Navbar, Nav, Form } from "react-bootstrap/";
+import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
 
-function Navigation() {
+
+
+  
+  function Navigation(props) {
+    return (
+      <Navbar bg="dark" variant="dark" fixed="top">
+        {/* <Navbar.Toggle aria-controls="left-sidebar" onClick={this.showSidebar}/> */}
+        <Navbar.Toggle aria-controls="left-sidebar" />
+        <Navbar.Brand href="/">
+          <ClipboardData className="mr-1" size="30" />Random Effects
+        </Navbar.Brand>
+        <Form
+          inline
+          className="my-0 mx-auto"
+          action="#"
+          role="search"
+          aria-label="Quick search"
+        >
+        </Form>
+        <Nav className="ml-auto">
+          <Nav.Item>
+            <Nav.Link onClick={props.logout} href={props.link}> {props.info}
+              <PersonCircle size="30" />
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar>
+    )
+  }
+
+  export default Navigation;
+
+
+
+  /*const {loginStatus} = props
   return (
     <>
       <div
@@ -13,6 +47,7 @@ function Navigation() {
           menu={[
             { name: "HOME PAGE", to: "/", component: Homepage },
             { name: "ARCHIVE PAGE", to: "/archive", component: Archive },
+            { name: "LOGIN PAGE", to :"/login", component: LoginComponent  }
           ]}
           social={[
             {
@@ -41,6 +76,4 @@ function Navigation() {
       </div>
     </>
   );
-}
-
-export default Navigation;
+} */

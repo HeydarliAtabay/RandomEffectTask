@@ -13,15 +13,15 @@ import Navigation from "./Components/Navigation";
 import Homepage from "./Components/Homepage";
 import Archive from "./Components/Archive";
 import LoginComponent from "./Components/LoginComponent"
+import AdminDetails from "./Components/AdminDetails"
 
 import API from "../src/API";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [dirty, setDirty] = useState(true);
-
-  const [effectList, setEffectList] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false); // at the beginning, no user is logged in
+const [loading, setLoading] = useState(true);
+const [dirty, setDirty] = useState(true);
+const [effectList, setEffectList] = useState([]);
+const [loggedIn, setLoggedIn] = useState(false); // at the beginning, no user is logged in
 const [message, setMessage] = useState('');
 const [userId, setUserId]=useState(1)
 
@@ -71,11 +71,12 @@ useEffect(()=> {
 
   return (
     <Router>
-      <Navigation />
+       {loggedIn? <Navigation logout={doLogOut} link={"/"} info={"Log out "} />: <Navigation logout={doLogOut} link="/login"info={"Log in "} />}
+      {(loggedIn && message) &&<AdminDetails greetings={message.msg}/>}
       <Container fluid>
         <Switch>
-          <Route path="/homepage">
-            <Homepage effects={effectList} />
+         <Route path="/homepage">
+            <Homepage effects={effectList} loggedIn={loggedIn} />
           </Route>
 
           <Route path="/archive">
@@ -86,8 +87,9 @@ useEffect(()=> {
           <Row className="vh-100 below-nav">
           {loggedIn ? <Redirect to="/homepage" /> : <LoginComponent login={doLogIn} serverError={message.msg}/>}
           </Row>
+
           </Route>
-          <Redirect to="/homepage" />
+         {!loggedIn && <Redirect to="/login" />} 
         </Switch>
       </Container>
     </Router>
