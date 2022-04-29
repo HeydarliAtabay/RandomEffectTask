@@ -11,6 +11,7 @@ import {
 import { FileUploader } from "react-drag-drop-files";
 import API from "../API";
 
+
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 function Homepage(props) {
@@ -59,52 +60,21 @@ function Homepage(props) {
           <div className="drag">
             {loggedIn && (
               <>
-                <FileUploader
-                  handleChange={handleChange}
-                  name="file"
-                  types={fileTypes}
-                  hoverTitle="Drop the image here"
-                  style={{ width: "500px" }}
-                />
                 <form
                   onSubmit={uploadFile}
                   encType="multipart/form-data"
                   action="#"
                 >
-                  <input type="file" name="image" onChange={saveFile} />
-                  {image ? (
-                    <button type="submit">Apply</button>
-                  ) : (
-                    <button type="submit">Upload</button>
-                  )}
+                  <input  type="file" name="image" onChange={saveFile} />
+                  <button className="btnsimple" type="submit">Apply</button>
+                  
                 </form>
-                <button onClick={showImage}>Show</button>
+                
 
-                {image && (
-                  <ImageBox file={image} height={height} width={width} />
-                )}
-                <Row>
-                  <Col sm={1}>Size</Col>
-                  <Col sm={3}>
-                    <Form.Control
-                      type="number"
-                      name="width"
-                      value={width}
-                      onChange={(ev) => setWidth(ev.target.value)}
-                      autoFocus
-                    />
-                  </Col>{" "}
-                  <Col sm={1}>x</Col>
-                  <Col sm={3}>
-                    <Form.Control
-                      type="number"
-                      name="height"
-                      value={height}
-                      onChange={(ev) => setHeight(ev.target.value)}
-                      autoFocus
-                    />
-                  </Col>
-                </Row>
+                
+                 {image ? <ImageBox style={{marginTop:"5px"}} file={image} height={height} width={width} /> : <ImageBox /> } 
+                 <button className="btnsimple" onClick={showImage}>Show</button>
+               
 
                 <Form>
                   <Row>
@@ -169,21 +139,43 @@ function Homepage(props) {
 }
 
 function ImageBox(props) {
-  const { file, height, width } = props;
+  const { file } = props;
 
   return (
     <>
       <div className="imgbx">
-        <Figure>
+        {file ? (
+          <>
+ <Figure>
           <Figure.Image
-            width={400}
-            height={400}
+            width={380}
+            height={380}
             src={require(`../assets/${file}`)}
+            className="rounded mb-0"
           />
           <Figure.Caption>
-            {`${file} was uploaded, please select the filter or transmission`}
+          <span style={{color:"white"}}> {`${file} was uploaded, please select the filter or transmission`} </span>
           </Figure.Caption>
         </Figure>
+          </>
+        )
+          :(
+            <>
+<Figure>
+          <Figure.Image
+            width={380}
+            height={380}
+            src={require(`../slideimages/noImage.jpg`)}
+          />
+          <Figure.Caption style={{color:"white"}}>
+       <span style={{color:"white"}}> No image was uploaded, please upload the image to continue </span> 
+          </Figure.Caption>
+        </Figure>
+            </>
+          )
+         
+        }
+       
       </div>
     </>
   );

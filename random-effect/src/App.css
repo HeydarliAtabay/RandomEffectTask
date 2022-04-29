@@ -82,9 +82,14 @@
   border-color: black;
 }
 .drag{
-
+  padding: 2rem;
+  color:white;
   margin-left: auto;
   margin-right: auto;
+  background-color: #99738E;
+  border-radius: 10px;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .loginForm {
@@ -135,6 +140,31 @@
   height: 48px;
 
 }
+
+.btnsimple{
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  transition-property: background-color,border-color,color,box-shadow,filter;
+  transition-duration: .3s;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 17px 48px;
+  color: #fff;
+  background-color: #F64C72;
+  height: 48px;
+  margin-bottom: 15px;
+
+}
+
 #btnlog :hover{
 
       transform: scale(1.04);
