@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Form } from "react-bootstrap/";
-import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
+import { PersonCircle, BrightnessAltHighFill } from "react-bootstrap-icons";
 
 
 
@@ -12,7 +12,7 @@ import { PersonCircle, ClipboardData } from "react-bootstrap-icons";
         {/* <Navbar.Toggle aria-controls="left-sidebar" onClick={this.showSidebar}/> */}
         <Navbar.Toggle aria-controls="left-sidebar" />
         <Navbar.Brand href="/">
-          <ClipboardData className="color-nav-text" size="30" /> <span className="color-nav-text">Random Effects</span>
+          <BrightnessAltHighFill className="color-nav-text" size="30" /> <span className="color-nav-text">Random Effects</span>
         </Navbar.Brand>
         <Form
           inline

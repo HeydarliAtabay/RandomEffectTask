@@ -3,7 +3,12 @@ function Archive(props) {
 
   return (
     <>
-        <p>This is archive page</p>
+       <div className="cont">
+        <div className="drag">
+          <img src={require("../slideimages/construction.png")} style={{height:"400px", width:"400px"}}/>
+          
+        </div>
+       </div>
     </>
   );
 }

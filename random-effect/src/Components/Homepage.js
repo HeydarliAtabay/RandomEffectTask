@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import {
-  Container,
   Row,
   Col,
   Figure,
   Form,
-  Button,
-  Carousel,
+  Carousel
 } from "react-bootstrap";
 import API from "../API";
-import { useAlert } from 'react-alert'
 
 
 const fileTypes = ["JPG", "PNG", "GIF"];
@@ -65,7 +62,7 @@ function Homepage(props) {
                   encType="multipart/form-data"
                   action="#"
                 >
-                  <input  type="file" name="image" onChange={saveFile} />
+                  <input  type="file" name="image" onChange={saveFile}  accept="image/png, image/gif, image/jpeg"/>
                  {file ? <button className="btnsimple" type="submit">Apply</button> : <button title="you should upload image first"className="btnsimple" type="submit" disabled>Apply</button>} 
                   
                 </form>
